@@ -29,8 +29,7 @@
   
 <jsp:include page="login.jsp" /> 
 
-<input type="hidden" name="userSession" value="<%=usuario%>">
-	<table class="table table-hover">
+ 	<table class="table table-hover">
          <thead>
              <tr class="text-center">
                  <th>ID</th>

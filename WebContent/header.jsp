@@ -25,19 +25,25 @@
 			      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 			      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			    </form>
-			    <div class="btn-group">
-				  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    Menu
-				  </button>
-				  <div class="dropdown-menu dropdown-menu-right">
-				  	<%if(usuario!=null){ %>
-				    <button class="dropdown-item" type="button"><% out.print(usuario); %></button>
-				    <a class="dropdown-item" href="inicio?accion=Salir">Salir</a>
+			    <%if(usuario!=null){ %>
+				    <div class="btn-group">
+					  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    Menu
+					  </button>
+					  <div class="dropdown-menu dropdown-menu-right">
+					  	 
+					    <button class="dropdown-item" type="button"><% out.print(usuario); %></button>
+					    <a class="dropdown-item" href="Inicio?accion=Salir">Salir</a>
+					  	 
+					  </div>
+					</div>
 				  	<%}else{%>
-				  	<button type="button"class="dropdown-item" data-toggle="modal" data-target="#exampleModal">Ingresar</button>
+				  	<ul class="navbar-nav ">
+			      		<li class="nav-item">
+				  			<a href="#"  class="nav-link" data-toggle="modal" data-target="#exampleModal">Ingresar</a>
+				  		</li>
+				  	</ul>
 				  <%} %>
-				  </div>
-				</div>
 			  </div>
 			</nav>
 	</header>

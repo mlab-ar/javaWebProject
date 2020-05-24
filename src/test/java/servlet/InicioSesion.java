@@ -14,7 +14,7 @@ import entidades.Cliente;
 /**
  * Servlet implementation class InicioSecion
  */
-@WebServlet("/inicio")
+@WebServlet("/Inicio")
 public class InicioSesion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,18 +36,24 @@ public class InicioSesion extends HttpServlet {
 			if(udao.validar(email, pass)) {
 				HttpSession objsesion = request.getSession(true);
 				objsesion.setAttribute("usuario", email);
+				System.out.println("usuario " +email);
+				System.out.println("pass: " +pass);
 				request.getRequestDispatcher("Controlador?accion=home").forward(request, response);
 			}else {
+				HttpSession objsesion = request.getSession(false);
+				objsesion.setAttribute("usuario", null);
+				System.out.println("usuario " +email);
+				System.out.println("pass: " +pass);
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
-			String accion = request.getParameter("accion");
-			
-			if(accion.equals("Salir")) {
-				HttpSession objsesion = request.getSession(false);
-				objsesion.setAttribute("usuario", email);
-				//request.getRequestDispatcher("menu.jsp").forward(request, response);
-			}
-			
+//			String accion = request.getParameter("accion");
+//			if(accion.equals("Salir")) {
+//				HttpSession objsesion = request.getSession(false);
+//				objsesion.setAttribute("usuario", email);
+//				System.out.println("Persona logeada " +email);
+//				request.getRequestDispatcher("index.jsp").forward(request, response);
+//			}
+//			
 			
 
 	}

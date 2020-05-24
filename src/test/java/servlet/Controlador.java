@@ -53,7 +53,7 @@ public class Controlador extends HttpServlet {
        	
     	HttpSession objsesion = request.getSession(false);
 		String usuario = (String)objsesion.getAttribute("usuario");
-		System.out.println("Persona logeada" +usuario);
+		//System.out.println("Persona logeada " +usuario);
     	
     	
 		String accion = request.getParameter("accion");

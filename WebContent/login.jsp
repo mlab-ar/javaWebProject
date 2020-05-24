@@ -19,7 +19,7 @@
       </div>
       <div class="modal-body">
         <div style="max-width:600px;margin:0 auto;">
-		<form action="inicio">
+		<form action="Inicio">
 		  <div class="form-group">
 		    <label for="exampleInputEmail1">Email</label>
 		    <input type="email" name="txtEmail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
