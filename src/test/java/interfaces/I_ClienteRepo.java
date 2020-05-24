@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 public interface I_ClienteRepo {
-    void inserta(Cliente cliente);
+    
+	
+	public void inserta(Cliente cliente);
+	boolean validar(String email, String password);
      
 //    List<Cliente>getAll();
 //    default Cliente getById(int id){

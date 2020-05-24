@@ -1,38 +1,34 @@
 package entidades;
 
 public class Cliente extends Persona {
-	//private int numeroCliente;
+	
 
 	public Cliente() {
 		
 	}
 
-	public Cliente(String nombre, String apellido, String email) {
-		super(nombre, apellido, email);
-		// TODO Auto-generated constructor stub
-		//this.numeroCliente = numeroCliente;
+	
+	public Cliente(int id, String dni, String nombre, String email, String password, Domicilio domicilio) {
+		super(id, dni, nombre, email, password, domicilio);
+		setId(id);
+		setDni(dni);
+		setNombre(nombre);
+		setEmail(email);
+		setPassword(password);
+		setDomicilio(domicilio);
 	}
+
 
 	@Override
 	public String toString() {
-		return "Cliente [hashCode()=" + hashCode() + ", toString()=" + super.toString() + ", getNombreCompleto()="
-				+ getNombreCompleto() + ", getId()=" + getId() + ", getNombre()=" + getNombre() + ", getApellido()="
-				+ getApellido() + ", getEmail()=" + getEmail() + ", getClass()=" + getClass() + "]";
+		return "Cliente [getDni()=" + getDni() + ", hashCode()=" + hashCode() + ", getId()=" + getId()
+				+ ", getNombre()=" + getNombre() + ", getEmail()=" + getEmail() + ", getPassword()=" + getPassword()
+				+ ", getDomicilio()=" + getDomicilio() + ", getClass()=" + getClass() + ", toString()="
+				+ super.toString() + "]";
 	}
-
-//	@Override
-//	public String toString() {
-//		return super.toString() + " " + "numeroCliente" + numeroCliente;
-//	}
-//
-//	public int getNumeroCliente() {
-//		return numeroCliente;
-//	}
-//
-//	public void setNumeroCliente(int numeroCliente) {
-//		this.numeroCliente = numeroCliente;
-//	}
 	
+
+
 	
 }
 

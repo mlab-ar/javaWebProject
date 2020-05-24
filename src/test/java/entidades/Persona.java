@@ -4,10 +4,11 @@ import utils.StringUtils;
 
 public abstract class Persona {
 	private int id;
+	private String dni;
 	private String nombre;
-	private String apellido;
 	private String email;
-	//private Domicilio domicilio;
+	private String password;
+	private Domicilio domicilio;
 	
 	
 	public Persona() {
@@ -16,11 +17,33 @@ public abstract class Persona {
 
 
 	
-	public Persona(String nombre, String apellido, String email) {
+	
+	public Persona(int id,String dni, String nombre, String email, String password, Domicilio domicilio) {
+		setId(id);
+		setDni(dni);
 		setNombre(nombre);
-		setApellido(apellido);
 		setEmail(email);
+		setPassword(password);
+		setDomicilio(domicilio);
+		
 	}
+
+
+
+
+	public String getDni() {
+		return dni;
+	}
+
+
+
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -34,21 +57,14 @@ public abstract class Persona {
 		return 1;
 	}
 
-	
-	@Override
-	public String toString() {
-		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + "]";
-	}
 
 
-
-	public String getNombreCompleto() {
-		return StringUtils.wordToCamelCase(nombre) + " " + StringUtils.wordToCamelCase(apellido);
-	}
 
 	public int getId() {
 		return id;
 	}
+
+
 
 
 	public void setId(int id) {
@@ -56,23 +72,17 @@ public abstract class Persona {
 	}
 
 
+
+
 	public String getNombre() {
 		return nombre;
 	}
 
 
+
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-
-	public String getApellido() {
-		return apellido;
-	}
-
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
 	}
 
 
@@ -83,14 +93,44 @@ public abstract class Persona {
 
 
 
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
 
-	
-	
-	
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
+
+	public Domicilio getDomicilio() {
+		return domicilio;
+	}
+
+
+
+
+	public void setDomicilio(Domicilio domicilio) {
+		this.domicilio = domicilio;
+	}
+
+
+
+
+	 
+
 	
 	
 	

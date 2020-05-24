@@ -9,9 +9,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import baseDeDatos.CompraDAO;
+import baseDeDatos.Fecha;
 import baseDeDatos.ProductoDAO;
 import entidades.Carrito;
+import entidades.Cliente;
+import entidades.Compra;
+import entidades.Pago;
 import entidades.Producto;
 
 /**
@@ -44,8 +50,15 @@ public class Controlador extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                throws ServletException, IOException {
        	
-       	String accion = request.getParameter("accion");
+       	
+    	HttpSession objsesion = request.getSession(false);
+		String usuario = (String)objsesion.getAttribute("usuario");
+		System.out.println("Persona logeada" +usuario);
+    	
+    	
+		String accion = request.getParameter("accion");
        	productos=(ArrayList<Producto>) pdao.listar();
+       	if(usuario != null) { 
    		switch(accion) {
    			case "Comprar":
    				totalPagar=0.0;
@@ -126,7 +139,6 @@ public class Controlador extends HttpServlet {
    			case "ActualizarCantidad":
    				int idpro = Integer.parseInt(request.getParameter("idp"));
    				int cant = Integer.parseInt(request.getParameter("cantidad"));
-   				System.out.println(cant);
    				for (int i = 0; i <  listaCarrito.size(); i++) {
 					if(listaCarrito.get(i).getIdProducto() == idpro) {
 						listaCarrito.get(i).setCantidad(cant);
@@ -136,6 +148,19 @@ public class Controlador extends HttpServlet {
 				}
    				
    				break;
+   			case "GenerarCompra":	
+   					Cliente cliente= new Cliente();
+   					cliente.setId(12);
+   					//Pago pago = new Pago();
+   					CompraDAO dao = new CompraDAO();
+   					Compra compra = new Compra(cliente, 19, Fecha.FechaBD(), totalPagar, "Cancelado",listaCarrito);
+   					int res = dao.GenerarCompra(compra);
+   					if(res!=0 && totalPagar>0) {
+   						request.getRequestDispatcher("mensaje.jsp").forward(request, response);
+   					}else {
+   						request.getRequestDispatcher("error.jsp").forward(request, response);
+   					}
+   					break;
    			case "Carrito":
    				totalPagar=0.0;
    				request.setAttribute("carrito", listaCarrito);
@@ -153,7 +178,9 @@ public class Controlador extends HttpServlet {
 
    		}
        	
-       	
+       	}else {
+       		request.getRequestDispatcher("index.jsp").forward(request, response);
+       	}
        }
 
 	/**

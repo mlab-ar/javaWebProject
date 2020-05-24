@@ -48,12 +48,10 @@ public class ProductoDAO{
 				st.setDouble(5, p.getStock());
 				st.execute();
 			} catch (Exception e) {
- 				System.out.println(e);
 			} finally {
 				try {
 					con.close();
 				} catch (SQLException e) {
-					e.printStackTrace();
 				}
 
 			}
@@ -77,7 +75,6 @@ public class ProductoDAO{
 				}
 				
 			} catch (Exception e) {
-				System.out.println(e);
 			} 
 			
 			return p;
@@ -156,24 +153,20 @@ public class ProductoDAO{
 		 BufferedOutputStream bufferedOutputStream=null;
  		 try {
 			outputStream= response.getOutputStream();
-			System.out.println("dadsadsad" + outputStream);
 			con = cn.obtenerConexion();
 			st = con.prepareStatement(sql);
 			rs = st.executeQuery();
 			if(rs.next()) {
 				inputStream= rs.getBinaryStream("Foto");
-				System.out.println("dadsadsad" + inputStream);
 			}
 			bufferedInputStream = new BufferedInputStream(inputStream);
 			bufferedOutputStream = new BufferedOutputStream(outputStream);
 			int i = 0;
 			while((i=bufferedInputStream.read())!= -1) {
 				bufferedOutputStream.write(i);
-				System.out.println(i);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println(e);
 		}
 	 }
 	 
