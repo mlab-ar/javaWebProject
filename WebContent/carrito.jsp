@@ -4,21 +4,17 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Producto"%>
+<%@page import="entidades.Carrito"%>
 <%@page import="interfaces.I_ProductosRepo" %>
 <%@page import="servlet.Controlador"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
         <%@ page import="java.util.Date" %>
- <%
-		HttpSession objsesion = request.getSession(false);
-		String usuario = (String)objsesion.getAttribute("usuario");
-		String idCliente = (String)objsesion.getAttribute("test");
-		int idNumber = Integer.parseInt(idCliente);
-// 		if(usuario==null){
-// 			response.sendRedirect("index.jsp");
-			 
-// 		}   
+  <%
+ 	HttpSession sesion = request.getSession(true);
+ 	ArrayList<Carrito> articulos= sesion.getAttribute("carrito") == null? null : (ArrayList) sesion.getAttribute("carrito");
+	
 	%> 
 <!DOCTYPE html>
 <html>
@@ -59,31 +55,27 @@
                      </tr>
                  </thead>
                  <tbody>
-                 <c:set var="idTest" value="${idCliente}" />
-                     <c:forEach var="car" items="${carrito}">
-                      
-                     	<div>${car.getCurrentCar()}</div>
-                         <tr class="text-center">
-                             <td >${car.getItem()}</td>
-                             <td>${car.getNombre()}
-                             <img src="ControladorIMG?id=${car.getIdProducto()}" height="100" width="100">
-                             </td>
-                             <td>${car.getDescripcion()}</td>
-                             <td>${car.getPrecioCompra()}</td>
-                             <td>
-                             	<input type="hidden" name="idCarro" class="idCarro" value="${car.getCurrentCar()}" />
-                             	<input type="hidden" name="idpro" class="idpro" value="${car.getIdProducto()}" />
-                             	<input style="padding:15px" type="number" name="cantidad" class="Cantidad" value="${car.getCantidad()}" min="1"/>
-                             </td>
-                             <td>${car.getSubtotal()}</td>  
-                             <td>
-                        	    <input type="hidden" name="idp" class="idp" value="${car.getIdProducto()}" />                          	
-                             	<a href="#" class="btnDelete">Eliminar</a>
-                             </td>                                  
-                         </tr>
-                         
-                     </c:forEach>   
-                                 
+                  <%  for(Carrito c: articulos){%>
+    					<tr class="text-center">
+                         <td ><%= c.getItem()%></td>
+                         <td><%= c.getNombre()%>
+                         <img src="ControladorIMG?id=<%= c.getIdProducto()%>" height="100" width="100">
+                         </td>
+                         <td><%= c.getDescripcion()%></td>
+                         <td><%= c.getPrecioCompra()%></td>
+                         <td>
+                         	<input type="hidden" name="idpro" class="idpro" value="<%= c.getIdProducto()%>" />
+                         	<input style="padding:15px" type="number" name="cantidad" class="Cantidad" value="<%= c.getCantidad()%>" min="1"/>
+                         </td>
+                         <td><%= c.getSubtotal()%></td>  
+                         <td>
+                    	    <input type="hidden" name="idp" class="idp" value="<%= c.getIdProducto()%>" />                          	
+                         	<a href="#" class="btnDelete">Eliminar</a>
+                         </td>                                  
+                     </tr>
+         		<% } %> 
+
+	    
                  </tbody>
              </table>  
              

@@ -39,7 +39,7 @@
 					    <h5 class="card-title">${p.getNombre()}</h5>
 					    <p class="card-text">$ ${p.getPrecio()}</p>
 					    <p class="card-text">${p.getDescripcion()}</p>
-					     <a role="button" class="btn btn-primary" href="Controlador?accion=AgregarCarrito&id=${p.getId()}">Agregar a carrito</a>
+					     <a role="button" class="btn btn-primary" href="add?accion=AgregarCarrito&id=${p.getId()}&cantidad=1">Agregar a carrito</a>
 	                     <a role="button" class="btn btn-danger" href="Controlador?accion=Comprar&id=${p.getId()}&<%=usuario%>">Comprar</a>
 					  </div>
 					</div>

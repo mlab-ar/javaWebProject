@@ -5,6 +5,9 @@
 	String usuario = (String)objsesion.getAttribute("usuario");
 	String test = (String)objsesion.getAttribute("test");
 	//int clienteId = (int)objsesion.getAttribute("clienteId");
+	if(usuario == null){
+		response.sendRedirect("index.jsp");
+	}
 	 
 %>
     <header>
@@ -19,7 +22,7 @@
 			        <a class="nav-link" href="Controlador?accion=home">Home</a>            
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link" href="Controlador?accion=Carrito">(<label>${contador}</label>)Carrito</a>
+			        <a class="nav-link" href="carrito.jsp">(<label>${contador}</label>)Carrito</a>
 			      </li>
 			       
 			    </ul>

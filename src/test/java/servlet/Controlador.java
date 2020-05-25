@@ -53,8 +53,6 @@ public class Controlador extends HttpServlet {
        	
     	HttpSession objsesion = request.getSession(true);
 		String usuario = (String)objsesion.getAttribute("usuario");
-		String test = (String)objsesion.getAttribute("test");
-		int test2 = Integer.parseInt(test);
 		
 		String accion = request.getParameter("accion");
        	productos=(ArrayList<Producto>) pdao.listar();
@@ -66,7 +64,7 @@ public class Controlador extends HttpServlet {
    				p = pdao.listarId(idp);
    				item = item+1;
    				car = new Carrito();
-   				car.setCurrentCar(test2);
+   				car.setCurrentCar(1);
    				car.setItem(item);
    				car.setIdProducto(p.getId());
    				car.setNombre(p.getNombre());
@@ -102,7 +100,7 @@ public class Controlador extends HttpServlet {
    					}else {
    						item = item+1;
    	   	   				car = new Carrito();
-   	   	   				car.setCurrentCar(test2);
+   	   	   				car.setCurrentCar(1);
    	   	   				car.setItem(item);
    	   	   				car.setIdProducto(p.getId());
    	   	   				car.setNombre(p.getNombre());
@@ -116,7 +114,7 @@ public class Controlador extends HttpServlet {
    				}else {
    					item = item+1;
    	   				car = new Carrito();
-   	   				car.setCurrentCar(test2);
+   	   				car.setCurrentCar(1);
    	   				car.setItem(item);
    	   				car.setIdProducto(p.getId());
    	   				car.setNombre(p.getNombre());
@@ -153,7 +151,7 @@ public class Controlador extends HttpServlet {
    				break;
    			case "GenerarCompra":	
    					Cliente cliente= new Cliente();
-   					cliente.setId(test2);
+   					cliente.setId(1);
    					//Pago pago = new Pago();
    					CompraDAO dao = new CompraDAO();
    					Compra compra = new Compra(cliente, 19, Fecha.FechaBD(), totalPagar, "Cancelado",listaCarrito);
@@ -174,8 +172,7 @@ public class Controlador extends HttpServlet {
    				objsesion.setAttribute("totalPagar", totalPagar);
    				request.getRequestDispatcher("carrito.jsp").forward(request, response);
    				
-   				break;
-   			 
+   				break;	
    			default:
    				request.setAttribute("productos", productos);
    				request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -183,6 +180,7 @@ public class Controlador extends HttpServlet {
    		}
        	
        	}else {
+       		objsesion.invalidate();
        		request.setAttribute("productos", productos);
        		request.getRequestDispatcher("index.jsp").forward(request, response);
        	}

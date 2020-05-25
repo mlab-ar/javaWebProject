@@ -30,6 +30,8 @@ public class InicioSesion extends HttpServlet {
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) 
    			throws ServletException, IOException {
 		 response.setContentType("text/html;charset=UTF-8");
+		 
+			String accion = request.getParameter("accion");
 		 	String email= request.getParameter("txtEmail");
 			String pass= request.getParameter("password");
 			int clienteId;
@@ -43,7 +45,7 @@ public class InicioSesion extends HttpServlet {
 				currentCli.setId(clienteId);
 				currentCli.setEmail(email);
 				
-				System.out.println(currentCli);
+				//System.out.println(currentCli);
 				objsesion.setAttribute("usuario", email);
 				objsesion.setAttribute("pass", pass);
 				objsesion.setAttribute("test", test);				
@@ -55,15 +57,11 @@ public class InicioSesion extends HttpServlet {
 				objsesion.removeAttribute("pass");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
-			String accion = request.getParameter("accion");
 			if(accion.equals("Salir")) {
 				HttpSession objsesion = request.getSession(false);
 				objsesion.removeAttribute("usuario");
 				objsesion.removeAttribute("clienteId");
-//				objsesion.removeAttribute("totalPagar");
-//   				objsesion.removeAttribute("carrito");
-//   				objsesion.removeAttribute("contador");
-				//request.getRequestDispatcher("Controlador?accion=home").forward(request, response);
+				objsesion.invalidate();
 			}
 			
 			
