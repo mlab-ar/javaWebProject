@@ -10,7 +10,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
         <%@ page import="java.util.Date" %>
- 
+ <%
+		HttpSession objsesion = request.getSession(false);
+		String usuario = (String)objsesion.getAttribute("usuario");
+		String idCliente = (String)objsesion.getAttribute("test");
+		int idNumber = Integer.parseInt(idCliente);
+// 		if(usuario==null){
+// 			response.sendRedirect("index.jsp");
+			 
+// 		}   
+	%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +59,10 @@
                      </tr>
                  </thead>
                  <tbody>
+                 <c:set var="idTest" value="${idCliente}" />
                      <c:forEach var="car" items="${carrito}">
+                      
+                     	<div>${car.getCurrentCar()}</div>
                          <tr class="text-center">
                              <td >${car.getItem()}</td>
                              <td>${car.getNombre()}
@@ -59,6 +71,7 @@
                              <td>${car.getDescripcion()}</td>
                              <td>${car.getPrecioCompra()}</td>
                              <td>
+                             	<input type="hidden" name="idCarro" class="idCarro" value="${car.getCurrentCar()}" />
                              	<input type="hidden" name="idpro" class="idpro" value="${car.getIdProducto()}" />
                              	<input style="padding:15px" type="number" name="cantidad" class="Cantidad" value="${car.getCantidad()}" min="1"/>
                              </td>
@@ -68,7 +81,9 @@
                              	<a href="#" class="btnDelete">Eliminar</a>
                              </td>                                  
                          </tr>
-                     </c:forEach>                    
+                         
+                     </c:forEach>   
+                                 
                  </tbody>
              </table>  
              

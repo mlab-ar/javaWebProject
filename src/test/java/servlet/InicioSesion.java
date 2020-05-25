@@ -32,28 +32,40 @@ public class InicioSesion extends HttpServlet {
 		 response.setContentType("text/html;charset=UTF-8");
 		 	String email= request.getParameter("txtEmail");
 			String pass= request.getParameter("password");
+			int clienteId;
 			UsuariosDAO udao = new UsuariosDAO(null);
+			clienteId = udao.IdCliente(email);
+			String test = String.valueOf(clienteId);
+			
 			if(udao.validar(email, pass)) {
 				HttpSession objsesion = request.getSession(true);
+				Cliente currentCli = new Cliente();
+				currentCli.setId(clienteId);
+				currentCli.setEmail(email);
+				
+				System.out.println(currentCli);
 				objsesion.setAttribute("usuario", email);
-				System.out.println("usuario " +email);
-				System.out.println("pass: " +pass);
+				objsesion.setAttribute("pass", pass);
+				objsesion.setAttribute("test", test);				
 				request.getRequestDispatcher("Controlador?accion=home").forward(request, response);
 			}else {
 				HttpSession objsesion = request.getSession(false);
-				objsesion.setAttribute("usuario", null);
-				System.out.println("usuario " +email);
-				System.out.println("pass: " +pass);
+				objsesion.removeAttribute("usuario");
+				objsesion.removeAttribute("clienteId");
+				objsesion.removeAttribute("pass");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
-//			String accion = request.getParameter("accion");
-//			if(accion.equals("Salir")) {
-//				HttpSession objsesion = request.getSession(false);
-//				objsesion.setAttribute("usuario", email);
-//				System.out.println("Persona logeada " +email);
-//				request.getRequestDispatcher("index.jsp").forward(request, response);
-//			}
-//			
+			String accion = request.getParameter("accion");
+			if(accion.equals("Salir")) {
+				HttpSession objsesion = request.getSession(false);
+				objsesion.removeAttribute("usuario");
+				objsesion.removeAttribute("clienteId");
+//				objsesion.removeAttribute("totalPagar");
+//   				objsesion.removeAttribute("carrito");
+//   				objsesion.removeAttribute("contador");
+				//request.getRequestDispatcher("Controlador?accion=home").forward(request, response);
+			}
+			
 			
 
 	}

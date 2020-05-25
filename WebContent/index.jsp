@@ -26,39 +26,29 @@
 
  <jsp:include page="header.jsp" /> 
 <div class="container-fluid">
-  
-<jsp:include page="login.jsp" /> 
-
- 	<table class="table table-hover">
-         <thead>
-             <tr class="text-center">
-                 <th>ID</th>
-                 <th>NOMBRES</th>
-                 <th>DESCRIPCION</th>
-                 <th>PRECIO</th>
-                 <th>IMAGEN</th>
-                  <th>ACCIONES</th>
-             </tr>
-         </thead>
-         <tbody>
-             <c:forEach var="p" items="${productos}">
-                 <tr class="text-center">
-                     <td ></td>
-                     <td>${p.getNombre()}</td>
-                     <td>${p.getDescripcion()}</td>
-                     <td>${p.getPrecio()}</td>
-                     <td><img src="ControladorIMG?id=${p.getId()}" height="100" width="100"></td>
-                     <td>
-                         <a href="Controlador?accion=AgregarCarrito&id=${p.getId()}">Agregar a carrito</a>
-                         <a href="Controlador?accion=Comprar&id=${p.getId()}&<%=usuario%>">Comprar</a>
-                     </td>
-                 </tr>
-             </c:forEach>                    
-         </tbody>
-     </table>  
-                
-</div>                 
-                 <!-- Optional JavaScript -->
+	<jsp:include page="login.jsp" /> 
+	<div class="container" style="padding:10px">
+		<div class="row">
+	            <c:forEach var="p" items="${productos}">
+	            	<div class="col-sm-3">
+	             	<div class="card">
+	             	  <div style="height: 150px;margin: 0 auto;padding:10px">
+					  	<img class="card-img-top" style="max-width:100px;height:auto;" src="ControladorIMG?id=${p.getId()}" height="100" width="100">
+	             	  </div>
+					  <div class="card-body">
+					    <h5 class="card-title">${p.getNombre()}</h5>
+					    <p class="card-text">$ ${p.getPrecio()}</p>
+					    <p class="card-text">${p.getDescripcion()}</p>
+					     <a role="button" class="btn btn-primary" href="Controlador?accion=AgregarCarrito&id=${p.getId()}">Agregar a carrito</a>
+	                     <a role="button" class="btn btn-danger" href="Controlador?accion=Comprar&id=${p.getId()}&<%=usuario%>">Comprar</a>
+					  </div>
+					</div>
+				</div>
+	            </c:forEach>                    
+		</div>
+	</div>
+</div>
+        <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

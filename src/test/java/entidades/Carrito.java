@@ -1,6 +1,7 @@
 package entidades;
 
 public class Carrito {
+	int currentCar;
 	int item;
 	int idProducto;
 	String nombre;
@@ -18,8 +19,9 @@ public class Carrito {
 	 
 
 
-	public Carrito(int item, int idProducto, String nombre, String descripcion, double precioCompra, int cantidad,
+	public Carrito(int currentCar,int item, int idProducto, String nombre, String descripcion, double precioCompra, int cantidad,
 			double subtotal) {
+		this.currentCar = currentCar;
 		this.item = item;
 		this.idProducto = idProducto;
 		this.nombre = nombre;
@@ -27,6 +29,22 @@ public class Carrito {
 		this.precioCompra = precioCompra;
 		this.cantidad = cantidad;
 		this.subtotal = subtotal;
+	}
+
+
+
+
+
+	public int getCurrentCar() {
+		return currentCar;
+	}
+
+
+
+
+
+	public void setCurrentCar(int currentCar) {
+		this.currentCar = currentCar;
 	}
 
 

@@ -3,6 +3,8 @@
 <%
 	HttpSession objsesion = request.getSession(false);
 	String usuario = (String)objsesion.getAttribute("usuario");
+	String test = (String)objsesion.getAttribute("test");
+	//int clienteId = (int)objsesion.getAttribute("clienteId");
 	 
 %>
     <header>

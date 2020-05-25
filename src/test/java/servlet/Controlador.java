@@ -51,11 +51,11 @@ public class Controlador extends HttpServlet {
                throws ServletException, IOException {
        	
        	
-    	HttpSession objsesion = request.getSession(false);
+    	HttpSession objsesion = request.getSession(true);
 		String usuario = (String)objsesion.getAttribute("usuario");
-		//System.out.println("Persona logeada " +usuario);
-    	
-    	
+		String test = (String)objsesion.getAttribute("test");
+		int test2 = Integer.parseInt(test);
+		
 		String accion = request.getParameter("accion");
        	productos=(ArrayList<Producto>) pdao.listar();
        	if(usuario != null) { 
@@ -66,6 +66,7 @@ public class Controlador extends HttpServlet {
    				p = pdao.listarId(idp);
    				item = item+1;
    				car = new Carrito();
+   				car.setCurrentCar(test2);
    				car.setItem(item);
    				car.setIdProducto(p.getId());
    				car.setNombre(p.getNombre());
@@ -77,9 +78,9 @@ public class Controlador extends HttpServlet {
    				for (int i = 0; i < listaCarrito.size(); i++) {
 					totalPagar = totalPagar+listaCarrito.get(i).getSubtotal();
 				}
-   				request.setAttribute("totalPagar", totalPagar);
-   				request.setAttribute("carrito", listaCarrito);
-   				request.setAttribute("contador", listaCarrito.size());
+   				objsesion.setAttribute("totalPagar", totalPagar);
+   				objsesion.setAttribute("carrito", listaCarrito);
+   				objsesion.setAttribute("contador", listaCarrito.size());
    				request.getRequestDispatcher("carrito.jsp").forward(request, response);
    			break;
    			case "AgregarCarrito":
@@ -101,6 +102,7 @@ public class Controlador extends HttpServlet {
    					}else {
    						item = item+1;
    	   	   				car = new Carrito();
+   	   	   				car.setCurrentCar(test2);
    	   	   				car.setItem(item);
    	   	   				car.setIdProducto(p.getId());
    	   	   				car.setNombre(p.getNombre());
@@ -114,6 +116,7 @@ public class Controlador extends HttpServlet {
    				}else {
    					item = item+1;
    	   				car = new Carrito();
+   	   				car.setCurrentCar(test2);
    	   				car.setItem(item);
    	   				car.setIdProducto(p.getId());
    	   				car.setNombre(p.getNombre());
@@ -124,7 +127,7 @@ public class Controlador extends HttpServlet {
    	   				listaCarrito.add(car);
    	   				
    				}		
-   				request.setAttribute("contador", listaCarrito.size());
+   				objsesion.setAttribute("contador", listaCarrito.size());
 	   			request.getRequestDispatcher("Controlador?accion=home").forward(request, response);
    				
    				break;
@@ -150,7 +153,7 @@ public class Controlador extends HttpServlet {
    				break;
    			case "GenerarCompra":	
    					Cliente cliente= new Cliente();
-   					cliente.setId(12);
+   					cliente.setId(test2);
    					//Pago pago = new Pago();
    					CompraDAO dao = new CompraDAO();
    					Compra compra = new Compra(cliente, 19, Fecha.FechaBD(), totalPagar, "Cancelado",listaCarrito);
@@ -163,15 +166,16 @@ public class Controlador extends HttpServlet {
    					break;
    			case "Carrito":
    				totalPagar=0.0;
-   				request.setAttribute("carrito", listaCarrito);
+   				objsesion.setAttribute("carrito", listaCarrito);
    				
    				for (int i = 0; i < listaCarrito.size(); i++) {
 					totalPagar = totalPagar+listaCarrito.get(i).getSubtotal();
 				}
-   				request.setAttribute("totalPagar", totalPagar);
+   				objsesion.setAttribute("totalPagar", totalPagar);
    				request.getRequestDispatcher("carrito.jsp").forward(request, response);
    				
    				break;
+   			 
    			default:
    				request.setAttribute("productos", productos);
    				request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -179,6 +183,7 @@ public class Controlador extends HttpServlet {
    		}
        	
        	}else {
+       		request.setAttribute("productos", productos);
        		request.getRequestDispatcher("index.jsp").forward(request, response);
        	}
        }
