@@ -55,13 +55,14 @@ public class InicioSesion extends HttpServlet {
 				objsesion.removeAttribute("usuario");
 				objsesion.removeAttribute("clienteId");
 				objsesion.removeAttribute("pass");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				//request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 			if(accion.equals("Salir")) {
 				HttpSession objsesion = request.getSession(false);
 				objsesion.removeAttribute("usuario");
 				objsesion.removeAttribute("clienteId");
 				objsesion.invalidate();
+				request.getRequestDispatcher("Controlador?accion=home").forward(request, response);
 			}
 			
 			

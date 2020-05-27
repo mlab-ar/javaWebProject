@@ -22,7 +22,7 @@
 			        <a class="nav-link" href="Controlador?accion=home">Home</a>            
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link" href="carrito.jsp">(<label>${contador}</label>)Carrito</a>
+			        <a class="nav-link" href="edit?accion=Carrito">(<label>${contador2}</label>)Carrito</a>
 			      </li>
 			       
 			    </ul>

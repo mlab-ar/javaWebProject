@@ -16,7 +16,7 @@ $(document).ready(function(){
 					icon: "success",
 				}).then((willDelete)=>{
 					if(willDelete){
-						parent.location.href="Controlador?accion=Carrito";
+						parent.location.href="carrito.jsp";
 					}
 				})
 			}else{
@@ -26,12 +26,12 @@ $(document).ready(function(){
 	});
 	
 	function eliminar(idp){
-		var url = "Controlador?accion=Delete";
+		var url = "edit?accion=Delete";
 		$.ajax({
 			type:"post",
 			url: url,
-			data: "idp=" + idp,
-			succes: function(data,textStatus,jqXHr){
+			data:"idp=" + idp,
+			success: function(r){
 				
 			}
 		})
@@ -48,8 +48,9 @@ $(document).ready(function(){
 			type:"post",
 			url: url,
 			data: "idp=" + idp + "&cantidad=" + cantidad,
-			success: function(data,textStatus,jqXHr){
-				location.href="Controlador?accion=Carrito";	
+			success: function(data){
+				//location.href="carrito.jsp";
+				console.log(data);
 			}
 		})
 	});

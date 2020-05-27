@@ -29,6 +29,7 @@
 	<jsp:include page="login.jsp" /> 
 	<div class="container" style="padding:10px">
 		<div class="row">
+				<div>${debesLogearte}</div>
 	            <c:forEach var="p" items="${productos}">
 	            	<div class="col-sm-3">
 	             	<div class="card">
@@ -39,8 +40,8 @@
 					    <h5 class="card-title">${p.getNombre()}</h5>
 					    <p class="card-text">$ ${p.getPrecio()}</p>
 					    <p class="card-text">${p.getDescripcion()}</p>
-					     <a role="button" class="btn btn-primary" href="add?accion=AgregarCarrito&id=${p.getId()}&cantidad=1">Agregar a carrito</a>
-	                     <a role="button" class="btn btn-danger" href="Controlador?accion=Comprar&id=${p.getId()}&<%=usuario%>">Comprar</a>
+					     <a role="button" class="btn btn-primary" href="edit?accion=AgregarCarrito&id=${p.getId()}&cantidad=1&continua=no">Agregar a carrito</a>
+	                     <a role="button" class="btn btn-danger" href="edit?accion=Comprar&id=${p.getId()}&cantidad=1&continua=si">Comprar</a>
 					  </div>
 					</div>
 				</div>

@@ -20,7 +20,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Carrito</title>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
@@ -29,6 +29,7 @@
  <jsp:include page="header.jsp" /> 
 <jsp:include page="login.jsp" /> 
 <div class="container">
+ <%if(articulos != null){ %>
 	<h1>Carrito</h1>
 	<a href="Controlador?accion=home">Seguir comprando</a>
 	
@@ -42,6 +43,7 @@
        	<a href="Controlador?accion=GenerarCompra">Generar compra</a>
        </div>
        <hr>
+      
 	<table class="table table-hover" border="1">
                  <thead>
                      <tr class="text-center">
@@ -67,7 +69,10 @@
                          	<input type="hidden" name="idpro" class="idpro" value="<%= c.getIdProducto()%>" />
                          	<input style="padding:15px" type="number" name="cantidad" class="Cantidad" value="<%= c.getCantidad()%>" min="1"/>
                          </td>
-                         <td><%= c.getSubtotal()%></td>  
+                         <td>
+                         	<input type="hidden" name="subtotal" class="subtotal" value="<%= c.getSubtotal()%>" />
+                         	<%= c.getSubtotal()%>
+                         </td>  
                          <td>
                     	    <input type="hidden" name="idp" class="idp" value="<%= c.getIdProducto()%>" />                          	
                          	<a href="#" class="btnDelete">Eliminar</a>
@@ -78,9 +83,9 @@
 	    
                  </tbody>
              </table>  
-             
-
-
+  	<% }else{ %>
+  		No hay articulos en el carro
+  	<%} %>            
 </div>
 	 
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>           
