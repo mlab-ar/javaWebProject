@@ -93,7 +93,7 @@ public class ProductoDAO{
 					e.printStackTrace();
 					throw new CafeStoreException();
 				}
-				String sql = "select * from producto where nombre  = ?";
+				String sql = "select * from producto where Nombres  = ?";
 				st = con.prepareStatement(sql);
 				st.setString(1, nombre);
 				rs = st.executeQuery();

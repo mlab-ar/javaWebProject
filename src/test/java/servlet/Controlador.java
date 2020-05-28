@@ -57,19 +57,7 @@ public class Controlador extends HttpServlet {
        	productos=(ArrayList<Producto>) pdao.listar();
        	
        	if(usuario != null) { 
-   		switch(accion) {	
-   			case "ActualizarCantidad":
-   				int idpro = Integer.parseInt(request.getParameter("idp"));
-   				int cant = Integer.parseInt(request.getParameter("cantidad"));
-   				for (int i = 0; i <  listaCarrito.size(); i++) {
-					if(listaCarrito.get(i).getIdProducto() == idpro) {
-						listaCarrito.get(i).setCantidad(cant);
-						double st=listaCarrito.get(i).getPrecioCompra()*cant;
-						listaCarrito.get(i).setSubtotal(st);
-					}
-				}
-   				
-   				break;
+   		switch(accion) {			
    			case "GenerarCompra":	
    					Cliente cliente= new Cliente();
    					cliente.setId(1);
@@ -82,18 +70,7 @@ public class Controlador extends HttpServlet {
    					}else {
    						request.getRequestDispatcher("error.jsp").forward(request, response);
    					}
-   					break;
-   			case "Carrito":
-   				totalPagar=0.0;
-   				request.setAttribute("carrito", listaCarrito);
-   				
-   				for (int i = 0; i < listaCarrito.size(); i++) {
-					totalPagar = totalPagar+listaCarrito.get(i).getSubtotal();
-				}
-   				request.setAttribute("totalPagar", totalPagar);
-   				request.getRequestDispatcher("carrito.jsp").forward(request, response);
-   				
-   				break;	
+   					break;			
    			default:
    				request.setAttribute("productos", productos);
    				request.getRequestDispatcher("index.jsp").forward(request, response);

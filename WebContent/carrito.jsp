@@ -21,7 +21,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Carrito</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
 </head>
@@ -35,16 +35,16 @@
 	
 	  <div>
        	<h2>Generar compra</h2>
-       	Subtotal <input type="text" value="$.${totalPagar}0" readonly="" class="form-control"/>
+       	Subtotal <input id="text-subtotal" type="text" value="$.${totalPagar}0" readonly="" class="form-control"/>
        	Descuento <input type="text" value="$.00" readonly="" class="form-control"/>
-       	Total a pagar<input type="text" value="$.${totalPagar}0" readonly="" class="form-control"/>
+       	Total a pagar<input id="text-total" type="text" value="$.${totalPagar}0" readonly="" class="form-control"/>
        	
        	<a href="#">Realizar pago</a>
        	<a href="Controlador?accion=GenerarCompra">Generar compra</a>
        </div>
        <hr>
       
-	<table class="table table-hover" border="1">
+	<table id="shop-table" class="table table-hover" border="1">
                  <thead>
                      <tr class="text-center">
                          <th>ITEM</th>
@@ -75,7 +75,7 @@
                          </td>  
                          <td>
                     	    <input type="hidden" name="idp" class="idp" value="<%= c.getIdProducto()%>" />                          	
-                         	<a href="#" class="btnDelete">Eliminar</a>
+                         	<button class="btnDelete">Eliminar</button>
                          </td>                                  
                      </tr>
          		<% } %> 
@@ -84,7 +84,7 @@
                  </tbody>
              </table>  
   	<% }else{ %>
-  		No hay articulos en el carro
+  		<h2>No hay articulos en el carro</h2>
   	<%} %>            
 </div>
 	 

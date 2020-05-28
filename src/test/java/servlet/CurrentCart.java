@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
 
 import baseDeDatos.ProductoDAO;
 import entidades.Carrito;
@@ -95,6 +98,18 @@ public class CurrentCart extends HttpServlet {
 			    		 request.getRequestDispatcher("Controlador?accion=home").forward(request, response);
 			    	 }
 		    	break;
+ 	    		case "ActualizarCantidad":
+ 	   				int idpro = Integer.parseInt(request.getParameter("idp"));
+ 	   				int cant = Integer.parseInt(request.getParameter("cantidad"));
+ 	   				for (int i = 0; i <  articulos.size(); i++) {
+ 						if(articulos.get(i).getIdProducto() == idpro) {
+ 							articulos.get(i).setCantidad(cant);
+ 							double st=articulos.get(i).getPrecioCompra()*cant;
+ 							articulos.get(i).setSubtotal(st);
+ 						}
+ 					}
+ 							request.getRequestDispatcher("edit?accion=Carrito").forward(request, response);
+ 	   				break;
 	    		case "Delete":
 	    			int idProducto2 =Integer.parseInt(request.getParameter("idp"));
 	    			if(currentCar != null) {
@@ -105,7 +120,26 @@ public class CurrentCart extends HttpServlet {
 			    			}
 			    		}
 			    		sesion.setAttribute("contador2", articulos.size());
+			    		//response.getWriter().print("/" + articulos.size() + "/");
 			    	}
+	    			totalPagar=0.0;
+	   				request.setAttribute("carrito", articulos);
+	   				
+	   				for (int i = 0; i < articulos.size(); i++) {
+						totalPagar = totalPagar+articulos.get(i).getSubtotal();
+					}
+ 	   				//response.getWriter().print(totalPagar);
+	   				ArrayList<Number> currentData = new ArrayList();
+	   				currentData.add(articulos.size());
+	   				currentData.add(totalPagar);
+ 	   				Gson gson = new Gson();
+ 	   				String datos = gson.toJson(currentData);
+ 	   				PrintWriter printWriter = response.getWriter();
+ 	   				response.setContentType("application/json");
+ 	   				response.setCharacterEncoding("UTF-8");
+ 	   				printWriter.write(datos);
+ 	   				printWriter.close();
+ 	   				
 	    			break;
 	    		case "Carrito":
 	   				totalPagar=0.0;
