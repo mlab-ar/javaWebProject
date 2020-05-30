@@ -13,8 +13,12 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import baseDeDatos.CompraDAO;
+import baseDeDatos.Fecha;
 import baseDeDatos.ProductoDAO;
 import entidades.Carrito;
+import entidades.Cliente;
+import entidades.Compra;
 import entidades.Producto;
 
 /**
@@ -44,7 +48,6 @@ public class CurrentCart extends HttpServlet {
             throws ServletException, IOException {
     	String accion = request.getParameter("accion");
     	String accion2 = request.getParameter("continua");
-    	double totalPagar=0.0;
     	
     	
     	HttpSession sesion = request.getSession(true);
@@ -151,7 +154,21 @@ public class CurrentCart extends HttpServlet {
 	   				request.setAttribute("totalPagar", totalPagar);
 	   				request.getRequestDispatcher("carrito.jsp").forward(request, response);
 	   				
-	   				break;	
+	   				break;
+	    		case "GenerarCompra":	
+   					Cliente cliente= new Cliente();
+   					cliente.setId(12);
+   					System.out.println(totalPagar);
+   					//Pago pago = new Pago();
+   					CompraDAO dao = new CompraDAO();
+   					Compra compra = new Compra(cliente, 19, Fecha.FechaBD(), totalPagar, "Cancelado",articulos);
+   					int res = dao.GenerarCompra(compra);
+   					if(res!=0 && totalPagar>0) {
+   						request.getRequestDispatcher("mensaje.jsp").forward(request, response);
+   					}else {
+   						request.getRequestDispatcher("error.jsp").forward(request, response);
+   					}
+   					break;	
 		    	default:
 		    		request.getRequestDispatcher("index.jsp").forward(request, response);
 	    	}

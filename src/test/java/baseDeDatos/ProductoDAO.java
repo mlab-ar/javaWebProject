@@ -18,7 +18,7 @@ import excepciones.CafeStoreException;
 import excepciones.NegocioException;
 import interfaces.I_ProductosRepo;
 
-public class ProductoDAO{
+public class ProductoDAO implements I_ProductosRepo{
 
 //	private Connection conn;
 //	public ProductoDAO(Connection conn) {
@@ -118,7 +118,7 @@ public class ProductoDAO{
 	
 	
 	 
-	public List listar() {
+	public List<Producto> listar() {
 		List<Producto>productos=new ArrayList<Producto>();
 		String sql = "select * from producto";
 		try {
@@ -169,6 +169,12 @@ public class ProductoDAO{
 			// TODO: handle exception
 		}
 	 }
+
+	@Override
+	public ArrayList<Producto> getProductos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	 
 	 
 //	 @Override

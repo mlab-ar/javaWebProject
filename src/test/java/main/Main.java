@@ -13,6 +13,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import com.mercadopago.MercadoPago;
+import com.mercadopago.exceptions.MPConfException;
+import com.mercadopago.exceptions.MPException;
+import com.mercadopago.resources.Payment;
+import com.mercadopago.resources.datastructures.payment.Payer;
+
 import baseDeDatos.UsuariosDAO;
 
 
@@ -83,8 +89,11 @@ public class Main {
 //       // Informa que se ha copiado el archivo
 //       System.out.println("\tEl archivo ha sido copiado con éxito....\n");
 		
-		UsuariosDAO u= new UsuariosDAO(null);
-		System.out.println(u.IdCliente("glombardo@cronista.com"));
+//		UsuariosDAO u= new UsuariosDAO(null);
+//		System.out.println(u.IdCliente("glombardo@cronista.com"));
+		
+		
+		 
 	}
 
 }

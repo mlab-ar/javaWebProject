@@ -52,30 +52,33 @@ public class Controlador extends HttpServlet {
        	
        	
     	HttpSession objsesion = request.getSession(true);
+    	ArrayList<Carrito> articulos= objsesion.getAttribute("carrito") == null? null : (ArrayList) objsesion.getAttribute("carrito");
 		String usuario = (String)objsesion.getAttribute("usuario");		
 		String accion = request.getParameter("accion");
        	productos=(ArrayList<Producto>) pdao.listar();
        	
        	if(usuario != null) { 
-   		switch(accion) {			
-   			case "GenerarCompra":	
-   					Cliente cliente= new Cliente();
-   					cliente.setId(1);
-   					//Pago pago = new Pago();
-   					CompraDAO dao = new CompraDAO();
-   					Compra compra = new Compra(cliente, 19, Fecha.FechaBD(), totalPagar, "Cancelado",listaCarrito);
-   					int res = dao.GenerarCompra(compra);
-   					if(res!=0 && totalPagar>0) {
-   						request.getRequestDispatcher("mensaje.jsp").forward(request, response);
-   					}else {
-   						request.getRequestDispatcher("error.jsp").forward(request, response);
-   					}
-   					break;			
-   			default:
-   				request.setAttribute("productos", productos);
-   				request.getRequestDispatcher("index.jsp").forward(request, response);
-
-   		}
+	   		switch(accion) {			
+	   			case "GenerarCompra":	
+	   					Cliente cliente= new Cliente();
+	   					cliente.setId(12);
+	   					double totalPagar2 = Double.parseDouble(request.getParameter("totalPagar"));
+	   					System.out.println(totalPagar2);
+	   					//Pago pago = new Pago();
+	   					CompraDAO dao = new CompraDAO();
+	   					Compra compra = new Compra(cliente, 19, Fecha.FechaBD(), totalPagar, "Cancelado",articulos);
+	   					int res = dao.GenerarCompra(compra);
+	   					if(res!=0 && totalPagar>0) {
+	   						request.getRequestDispatcher("mensaje.jsp").forward(request, response);
+	   					}else {
+	   						request.getRequestDispatcher("error.jsp").forward(request, response);
+	   					}
+	   					break;			
+	   			default:
+	   				request.setAttribute("productos", productos);
+	   				request.getRequestDispatcher("index.jsp").forward(request, response);
+	
+	   		}
        	
        	}else {
        		objsesion.invalidate();

@@ -4,7 +4,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Producto"%>
 <%@page import="interfaces.I_ProductosRepo" %>
-<%@page import="servlet.ListadoProductos"%>
 <%@page import="java.util.List"%>
 
 

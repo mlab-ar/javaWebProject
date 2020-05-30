@@ -17,6 +17,8 @@ public interface I_ProductosRepo {
 //		}
 //		default void listarImg(int id, HttpServletResponse response) {
 //		}
+	
+		public List<Producto> listar();
 		ArrayList<Producto> getProductos();
 		
 	 

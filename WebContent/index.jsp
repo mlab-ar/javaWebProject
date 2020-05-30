@@ -1,3 +1,7 @@
+<%@page import="baseDeDatos.ProductoDAO"%>
+<%@page import="interfaces.I_ProductosRepo" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,6 +16,11 @@
 			 
 // 		}   
 	%> 
+
+<% 
+// 	I_ProductosRepo pdao = new ProductoDAO();
+//  	out.print(pdao.listar());
+%>
 
 
 <html>
