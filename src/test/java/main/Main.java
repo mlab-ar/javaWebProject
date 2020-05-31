@@ -92,8 +92,16 @@ public class Main {
 //		UsuariosDAO u= new UsuariosDAO(null);
 //		System.out.println(u.IdCliente("glombardo@cronista.com"));
 		
+//		UsuariosDAO u= new UsuariosDAO(null);
+//		boolean test= u.enviarCorreo("eclaverie@gmail.com");
+//		 
+//		if(test) {
+//			System.out.print("correo enviado!!");
+//		}else {
+//			System.out.print("MAL!!");
+//		}
 		
-		 
+		
 	}
 
 }

@@ -173,8 +173,10 @@ public class CurrentCart extends HttpServlet {
 		    		request.getRequestDispatcher("index.jsp").forward(request, response);
 	    	}
     	}else {
-    		String notLogged = "Debes logearte";
+    		String notLogged = "show";
+    		String notLoggedText = "Para comprar debes estar logeado";
     		request.setAttribute("debesLogearte", notLogged);
+    		request.setAttribute("debesLogearteText", notLoggedText);
     		request.getRequestDispatcher("Controlador?accion=home").forward(request, response);
     	}
     	 

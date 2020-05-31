@@ -37,7 +37,7 @@ public class Controlador extends HttpServlet {
     
     ProductoDAO pdao = new ProductoDAO();
     Producto p = new Producto();
-    ArrayList<Producto>productos=new ArrayList<>();
+   // ArrayList<Producto>productos=new ArrayList<>();
    	
     ArrayList<Carrito>listaCarrito = new ArrayList<>();
    	int item;
@@ -55,7 +55,7 @@ public class Controlador extends HttpServlet {
     	ArrayList<Carrito> articulos= objsesion.getAttribute("carrito") == null? null : (ArrayList) objsesion.getAttribute("carrito");
 		String usuario = (String)objsesion.getAttribute("usuario");		
 		String accion = request.getParameter("accion");
-       	productos=(ArrayList<Producto>) pdao.listar();
+       	//productos=(ArrayList<Producto>) pdao.listar();
        	
        	if(usuario != null) { 
 	   		switch(accion) {			
@@ -75,14 +75,14 @@ public class Controlador extends HttpServlet {
 	   					}
 	   					break;			
 	   			default:
-	   				request.setAttribute("productos", productos);
+	   				//request.setAttribute("productos", productos);
 	   				request.getRequestDispatcher("index.jsp").forward(request, response);
 	
 	   		}
        	
        	}else {
        		objsesion.invalidate();
-       		request.setAttribute("productos", productos);
+       		//request.setAttribute("productos", productos);
        		request.getRequestDispatcher("index.jsp").forward(request, response);
        	}
        }

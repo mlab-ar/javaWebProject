@@ -48,10 +48,12 @@ public class ProductoDAO implements I_ProductosRepo{
 				st.setDouble(5, p.getStock());
 				st.execute();
 			} catch (Exception e) {
+				System.out.println(e);
 			} finally {
 				try {
 					con.close();
 				} catch (SQLException e) {
+					System.out.println(e);
 				}
 
 			}

@@ -19,7 +19,7 @@
 			    <a class="navbar-brand" href="#"></a>
 			    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 			      <li class="nav-item">
-			        <a class="nav-link" href="Controlador?accion=home">Home</a>            
+			        <a class="nav-link" href="/webProject2/">Home</a>            
 			      </li>
 			      <li class="nav-item">
 			        <a class="nav-link" href="edit?accion=Carrito">(<label class="misProd">${contador2}</label>)Carrito</a>
@@ -45,7 +45,7 @@
 				  	<%}else{%>
 				  	<ul class="navbar-nav ">
 			      		<li class="nav-item">
-				  			<a href="#"  class="nav-link" data-toggle="modal" data-target="#exampleModal">Ingresar</a>
+				  			<a href="/webProject2/index.jsp"  class="nav-link" data-toggle="modal" data-target="#loginModal">Ingresar</a>
 				  		</li>
 				  	</ul>
 				  <%} %>
